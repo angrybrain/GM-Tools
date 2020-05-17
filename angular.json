@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "gm-tools",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -119,6 +119,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "GM-Tools"
 }
