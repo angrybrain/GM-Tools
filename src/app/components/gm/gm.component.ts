@@ -33,7 +33,7 @@ export class GmComponent implements OnInit {
   }
 
   saveCharacter(character: Character) {
-    this.charactersService.update(character);
+    this.charactersService.update(character).subscribe(() => { }), (error) => { alert('NOT SAVED') };
   }
 
   createNewCharacter() {
