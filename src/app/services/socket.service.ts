@@ -19,7 +19,6 @@ export class SocketService {
 
     let observable = new Observable(observer => {
       this.socket.on('update', () => {
-        console.log("Received message from Websocket Server")
         observer.next();
       })
       return () => {
