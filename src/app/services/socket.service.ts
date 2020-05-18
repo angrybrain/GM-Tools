@@ -19,6 +19,7 @@ export class SocketService {
 
     let observable = new Observable(observer => {
       this.socket.on('update', () => {
+        console.log('data updated');
         observer.next();
       })
       return () => {
@@ -27,9 +28,9 @@ export class SocketService {
     });
 
     let observer = {
-      next: (data: Object) => {
-        this.socket.emit('message', JSON.stringify(data));
-      },
+      next: () => {
+        this.socket.emit('update');
+      }
     };
 
     return Rx.Subject.create(observer, observable);
