@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Character } from '../../models/character'
-import { CharacterService } from '../../services/character.service'
+import { CharacterService } from '../../services/character.service';
+import { UpdateService } from '../../services/update.service';
 import faker from 'faker';
 import classList from '../../models/classes';
 
@@ -11,7 +12,7 @@ import classList from '../../models/classes';
 })
 export class GmComponent implements OnInit {
 
-  constructor(public charactersService: CharacterService) { }
+  constructor(public charactersService: CharacterService, private updateService: UpdateService) { }
 
   characters = [];
 
@@ -28,12 +29,14 @@ export class GmComponent implements OnInit {
       .subscribe((respond) => {
         this.characters = this.characters.filter(character =>
           respond._id !== character._id
-        )
+        );
+        this.updateService.sendUpdate("Delete");
       })
   }
 
   saveCharacter(character: Character) {
     this.charactersService.update(character).subscribe(() => { }), (error) => { alert('NOT SAVED') };
+    this.updateService.sendUpdate("Save");
   }
 
   createNewCharacter() {
@@ -74,6 +77,7 @@ export class GmComponent implements OnInit {
     };
     this.charactersService.add(character).subscribe((respond) => {
       this.characters.push(respond);
+      this.updateService.sendUpdate("Add new");
     })
   }
 
