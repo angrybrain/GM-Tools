@@ -73,6 +73,14 @@
             </button>
         </div>
     </div>
+    <div class="textBox">
+        <h3>Items:</h3>
+        <textarea [(ngModel)]="character.items"></textarea>
+        <h3>Effects:</h3>
+        <textarea [(ngModel)]="character.effects"></textarea>
+        <h3>Notes:</h3>
+        <textarea [(ngModel)]="character.notes"></textarea>
+    </div>
     <div *ngIf="toggle" class="config">
         <h3>Status:</h3>
         <div class="checks">
@@ -305,9 +313,5 @@
                     />
             </div>
         </div>
-        <h3>Items:</h3>
-        <textarea [(ngModel)]="character.items"></textarea>
-        <h3>Effects:</h3>
-        <textarea [(ngModel)]="character.effects"></textarea>
     </div>
 </div>

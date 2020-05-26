@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { Character } from '../../models/character'
+import { PanicEffects } from '../../enums/panicEffects'
+
 
 @Component({
   selector: 'gm-tools-character',
@@ -18,53 +20,53 @@ export class CharacterComponent implements OnInit {
   }
 
   dead: boolean = false;
-  toggle = false;
+  toggle: boolean = false;
 
   toggleConfig() {
     this.toggle = !this.toggle;
   }
 
 
-  panicEffects(value: number) {
+  panicEffectRoll(value: number) {
     let effect: string;
     if (value >= 0 && value <= 3) {
-      effect = 'Laser Focus: Advantage on all rolls for the next 1d10 hours';
+      effect = PanicEffects.LaserFocus;
     } else if (value >= 4 && value <= 5) {
-      effect = 'Major Adrenaline Rush: Advantage on all rolld for the next 3d10 minutes';
+      effect = PanicEffects.MajorAdrenalineRush;
     } else if (value >= 6 && value <= 7) {
-      effect = 'Minor Adrenaline Rush: Advantage on all rolls for the next 1d10 minutes';
+      effect = PanicEffects.MinorAdrenalineRush;
     } else if (value >= 8 && value <= 9) {
-      effect = 'Anxious: Gain 1 Stress';
+      effect = PanicEffects.Anxious;
     } else if (value >= 10 && value <= 11) {
-      effect = 'Nervous thitch: Gain 2 Stress. The nearest crew member also gains 1 Stress';
+      effect = PanicEffects.NervousThitch;
     } else if (value >= 12 && value <= 13) {
-      effect = 'Cowardice: Gain 1 Stress. For the next 1d10 hours you must make a Fear Save to engage in combat or else flee';
+      effect = PanicEffects.Cowardice;
     } else if (value >= 14 && value <= 15) {
-      effect = 'Hallucinations: For the newxt 2d10 hours(determined secretly) you have trouble distinguishing between reality and fantasy';
+      effect = PanicEffects.Hallucinations;
     } else if (value >= 16 && value <= 17) {
-      effect = 'Cripping Fear: Gain a new permanent phobia. Whenever you encounter this phobia make a Fear Save at Disadvantage of gain 1d10 Stress';
+      effect = PanicEffects.CrippingFear;
     } else if (value >= 18 && value <= 19) {
-      effect = 'Owerhelmed: Gain 1d10 Stress';
+      effect = PanicEffects.Owerhelmed;
     } else if (value >= 20 && value <= 21) {
-      effect = 'Rattled: Let out a blood-curdling scream! Disadvantage on rolls for 2d10 minutes';
+      effect = PanicEffects.Rattled;
     } else if (value == 22) {
-      effect = 'Paranoid: For he next 1d10 days, whenever a character joins your group make a Fear Save or gain 1 Stress';
+      effect = PanicEffects.Paranoid;
     } else if (value == 23) {
-      effect = 'Death Drive: For the next Xd10 days(where X=Stress) whenever you encounter a stranger or known enemy you must make a Sanity Save or else immediately attack them';
+      effect = PanicEffects.DeathDrive;
     } else if (value == 24) {
-      effect = 'Catatonic: Become unresponsive and unmoving for Xd10 minutes(where X=Stress)';
+      effect = PanicEffects.Catatonic;
     } else if (value == 25) {
-      effect = 'Broken: Fort the next Xd10 days(where X=Stress) make a Panic Check whenever a nearby crew member fails a Save';
+      effect = PanicEffects.Broken;
     } else if (value == 26) {
-      effect = 'Psychotic: Immediately attack the closest crew member until you do at least 2d10 Damage. If there is no crew member nearby you attack the enviroment';
+      effect = PanicEffects.Psychotic;
     } else if (value == 27) {
-      effect = 'Compouding Problems: Roll twice on this table(page 8)';
+      effect = PanicEffects.CompoudingProblem;
     } else if (value == 28) {
-      effect = 'Descent into Madness: Gain 2 new phobias! Your Stress cannot be relieved below 5.';
+      effect = PanicEffects.DescentIntoMadness;
     } else if (value == 29) {
-      effect = 'Psychological Collapse: You become permanently, irreparably insane, Your character is now played by the GM';
+      effect = PanicEffects.PsychologicalCollapse;
     } else if (value >= 30) {
-      effect = 'Hearth Attack: Instant death';
+      effect = PanicEffects.HearthAttack;
     }
     return effect;
   }
@@ -267,8 +269,8 @@ export class CharacterComponent implements OnInit {
       }
     } else {
       let panicRoll = +prompt(`Roll another 2d10 to define Panic Effect`) - this.character.resolve;
-      const effect = this.panicEffects(panicRoll);
-      alert(`Gained ${effect}!`)
+      const effect = this.panicEffectRoll(panicRoll);
+      alert(`Gained ${effect}!`);
     }
   }
 

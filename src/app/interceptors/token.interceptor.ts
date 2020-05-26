@@ -16,7 +16,12 @@ export class TokenInterceptor implements HttpInterceptor {
         }
 
         return next.handle(request).pipe(catchError(error => {
-            if (error instanceof HttpErrorResponse) {
+            if (error instanceof HttpErrorResponse && error.status === 401) {
+                this.authService.logout();
+                return throwError(error);
+            } else if (error instanceof HttpErrorResponse && error.status === 403) {
+                this.authService.logout();
+            } else {
                 return throwError(error);
             }
         }));

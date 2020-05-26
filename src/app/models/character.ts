@@ -6,6 +6,7 @@ export interface Character {
     resolve: number,
     effects: string,
     items: string,
+    notes: string,
     advantages: {
         Stress: boolean,
         STR: boolean,
