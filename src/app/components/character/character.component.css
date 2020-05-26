@@ -1,40 +1,102 @@
-.border {
+.container {
+    max-width: 800px;
     padding: 1rem;
     margin-top: 1rem;
     border: 1px black dotted;
+    display: grid;
+    grid-template-columns: 100px auto 100px;
+    grid-template-rows: auto;
+    grid-template-areas: "name name name" "stats stress actions" "stats body actions" "info info info" "config config config";
+    justify-items: center;
+    align-items: stretch;
 }
 
-.character {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
+.character-name {
+    grid-area: name;
+    width: 100%;
 }
 
-.stats {
-    width: 100px;
+.character-name input {
+    border-width: 0 0 0 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
+    background-color: white;
 }
 
-.body {
-    display: flex;
+.character-active {
+    grid-area: name;
+    justify-self: end;
     align-items: center;
-    flex-direction: column;
+}
+
+.character-active input {
+    height: 20px;
+    width: 20px;
+}
+
+.stats-block {
+    grid-area: stats;
+}
+
+.stats-block button {
+    width: 100%;
+    height: 30px;
+    border: 0px solid black;
+    border-width: 0 0 1px 0;
+}
+
+.stats-block button:hover {
+    border: 1px black solid;
+    background-color: gray;
+}
+
+.stress-block {
+    grid-area: stress;
+    display: flex;
+    justify-items: center;
+}
+
+.stress-block input {
+    border: 0px solid black;
+    text-align: center;
+    font-size: large;
+}
+
+.body-block {
+    grid-area: body;
     width: 400px;
 }
 
-.stress {
-    display: flex;
-    flex-direction: row;
-}
-
-.actions {
+.actions-block {
+    grid-area: actions;
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 100px;
 }
 
-.config {
+.actions-block button {
+    margin-top: 5px;
+    width: 100px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.textinfo-block {
+    grid-area: info;
+}
+
+.textinfo-block textarea {
+    max-width: 700px;
+    width: 700px;
+    height: auto;
+}
+
+.config-block {
+    grid-area: config;
     margin: auto;
     width: 700px;
     height: 200px;
@@ -63,12 +125,7 @@
     border: solid 1px black;
 }
 
-textarea {
-    width: 600px;
-    height: 100px;
-}
-
-input {
+.config-block input {
     width: 50px;
     height: 50px;
     background-color: white;
@@ -78,135 +135,97 @@ input {
     text-align: center;
 }
 
-button {
-    width: 100%;
-    height: 30px;
-    border: 0px solid black;
-    border-width: 0 0 1px 0;
-}
-
-button:hover {
-    border: 1px black solid;
-}
-
-.action {
-    margin-top: 5px;
-    width: 100px;
-    height: 50px;
-    background-color: white;
-    border: 1px solid black;
-    text-align: center;
-}
-
-button :hover {
-    background-color: gray;
-}
-
-.name {
-    border-width: 0 0 0 0;
-    font-size: 1.5em;
-    font-weight: bold;
-    width: 100%;
-    text-align: left;
-}
-
-.stress-block {
-    display: flex;
-    flex-direction: row;
-    padding-left: 20px;
-    width: 100%;
-}
-
-.textBox {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.textBox textarea {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-}
-
 @media (max-width: 650px) {
-    .border {
-        margin: auto;
-        padding: 1rem;
-        margin-top: 1rem;
-        border: 1px black dotted;
+    .container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto;
+        grid-template-areas: "name name" "stress stress" "body body" "stats actions" "info info" "config config";
+        justify-items: center;
+        align-items: stretch;
     }
-    .character {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        flex-wrap: wrap;
+    .character-name {
+        grid-area: name;
     }
-    .stats {
-        width: 100%;
+    .character-name input {
+        border-width: 0 0 0 0;
+        font-size: 1.2em;
+        font-weight: bold;
+        width: 70%;
+        text-align: left;
     }
-    .body {
+    .character-active {
+        grid-area: name;
+    }
+    .character-active input {
+        height: 20px;
+        width: 20px;
+    }
+    .stress-block {
+        grid-area: stress;
+    }
+    .stress-block input {
+        border: 0px solid black;
+        text-align: center;
+        font-size: large;
+    }
+    .body-block {
+        grid-area: body;
+        width: 400px;
+    }
+    .stats-block {
+        grid-area: stats;
+    }
+    .stats-block button {
+        height: 30px;
+        border: 0px solid black;
+        border-width: 0 0 1px 0;
+    }
+    .stats-block button:hover {
+        border: 1px black solid;
+        background-color: gray;
+    }
+    .actions-block {
+        grid-area: actions;
         display: flex;
         align-items: center;
+        justify-content: stretch;
         flex-direction: column;
-        width: 100%;
     }
-    .stress {
-        margin: auto;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-    .actions {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-    }
-    .config {
-        display: flex;
-        flex-wrap: wrap;
-        margin: auto;
-        width: 90%;
-        height: 400px;
-        border: 1px solid black;
-        background-color: whitesmoke;
-        overflow: auto;
-        padding: 1em;
-        margin-top: 1em;
-    }
-    .checks {
-        margin: 1em;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    .checks div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        width: 80px;
-        height: 80px;
-        border-collapse: collapse;
-        border: solid 1px black;
-    }
-    button {
-        width: 100%;
-        height: 50px;
-        border: 1px solid black;
-    }
-    .action {
+    .actions-block button {
         margin-top: 5px;
         width: 100%;
         height: 50px;
         background-color: white;
         border: 1px solid black;
         text-align: center;
+    }
+    .textinfo-block {
+        grid-area: info;
+        width: 100%;
+    }
+    .textinfo-block textarea {
+        max-width: 100%;
+        height: auto;
+    }
+    .config-block {
+        grid-area: config;
+        max-width: 90%;
+        margin: auto;
+        height: 200px;
+        border: 1px solid black;
+        background-color: whitesmoke;
+        padding: 1em;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .checks {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .checks div {
+        margin: 10px;
+        width: 100px;
+        height: 50px;
     }
 }
