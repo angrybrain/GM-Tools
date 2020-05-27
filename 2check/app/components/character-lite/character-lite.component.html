@@ -1,0 +1,121 @@
+<div class="border">
+    <input class="name" type="text" [(ngModel)]="character.name">
+    <hr>
+    <div class="character">
+        <div class="stats">
+            <h3>Stats:</h3>
+            <hr>
+            <div class="info">
+                STR:
+                <strong>{{character.stats.STR}}</strong>
+                <strong
+                    class="adv"
+                    *ngIf="character.advantages.STR">A</strong>
+                <strong
+                    class="dis"
+                    *ngIf="character.disadvantages.STR">D</strong>
+            </div>
+            <div class="info">
+                SPD:
+                <strong>{{character.stats.SPD}}</strong>
+                <strong
+                    class="adv"
+                    *ngIf="character.advantages.SPD">A</strong>
+                <strong
+                    class="dis"
+                    *ngIf="character.disadvantages.SPD">D</strong>
+            </div>
+            <div class="info">
+                INT:
+                <strong>{{character.stats.INT}}</strong>
+                <strong
+                    class="adv"
+                    *ngIf="character.advantages.INT">A</strong>
+                <strong
+                    class="dis"
+                    *ngIf="character.disadvantages.INT">D</strong>
+            </div>
+            <div class="info">
+                CMB:
+                <strong>{{character.stats.CMB}}</strong>
+                <strong
+                    class="adv"
+                    *ngIf="character.advantages.CMB">A</strong>
+                <strong
+                    class="dis"
+                    *ngIf="character.disadvantages.CMB">D</strong>
+            </div>
+            <h3>Saves:</h3>
+            <hr>
+            <div class="info">
+                Sanity:
+                <strong>{{character.saves.Sanity}}</strong>
+                <strong
+                    class="adv"
+                    *ngIf="character.advantages.Sanity">A</strong>
+                <strong
+                    class="dis"
+                    *ngIf="character.disadvantages.Sanity">D</strong>
+            </div>
+            <div class="info">
+                Fear:
+                <strong>{{character.saves.Fear}}</strong>
+                <strong
+                    class="adv"
+                    *ngIf="character.advantages.Fear">A</strong>
+                <strong
+                    class="dis"
+                    *ngIf="character.disadvantages.Fear">D</strong>
+            </div>
+            <div class="info">
+                Body:
+                <strong>{{character.saves.Body}}</strong>
+                <strong
+                    class="adv"
+                    *ngIf="character.advantages.Body">A</strong>
+                <strong
+                    class="dis"
+                    *ngIf="character.disadvantages.Body">D</strong>
+            </div>
+            <div class="info">
+                Armor:
+                <strong>{{character.saves.Armor}}</strong>
+                <strong
+                    class="adv"
+                    *ngIf="character.advantages.Armor">A</strong>
+                <strong
+                    class="dis"
+                    *ngIf="character.disadvantages.Armor">D</strong>
+            </div>
+        </div>
+        <div class="body">
+            <div class="stress">
+                <h3>Stress:</h3>
+                <input
+                    disabled
+                    [(ngModel)]="character.stress"
+                    max="20"
+                    min="2">
+                <h3>Resolve:</h3>
+                <input type="number"
+                    disabled
+                    [(ngModel)]="character.resolve"
+                    max="5"
+                    min="0">
+            </div>
+            <gm-tools-body
+                [health]="character.health"
+                [armor]="character.armor"></gm-tools-body>
+        </div>
+        <div class="extra-info">
+            <h3>Items:</h3>
+            <textarea
+                disabled
+                [(ngModel)]="character.items"></textarea>
+            <h3>Effects:</h3>
+            <textarea
+                disabled
+                [(ngModel)]="character.effects"></textarea>
+        </div>
+    </div>
+</div>

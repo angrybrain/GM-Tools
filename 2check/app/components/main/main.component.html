@@ -1,0 +1,9 @@
+<header>
+    <div class="title">
+        <h1>Arkham</h1>
+        <button (click)="logout()">Logout</button>
+    </div>
+    <hr>
+</header>
+<gm-tools-gm *ngIf="role==='gm'"></gm-tools-gm>
+<gm-tools-player *ngIf="role==='player'"></gm-tools-player>

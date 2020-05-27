@@ -1,0 +1,12 @@
+svg, svg * {
+    pointer-events: all;
+}
+
+path {
+    stroke: black;
+}
+
+path:hover {
+    stroke: red;
+    stroke-width: 5;
+}
