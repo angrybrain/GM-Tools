@@ -4,6 +4,9 @@ import { CharacterService } from '../../services/character.service';
 import { UpdateService } from '../../services/update.service';
 import faker from 'faker';
 import classList from '../../models/classes';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/state/app.state';
+import { LoadCharactersRequest } from 'src/app/store/actions/main.actions';
 
 @Component({
   selector: 'gm-tools-gm',
@@ -12,12 +15,13 @@ import classList from '../../models/classes';
 })
 export class GmComponent implements OnInit {
 
-  constructor(public charactersService: CharacterService, private updateService: UpdateService) { }
+  constructor(public charactersService: CharacterService, private updateService: UpdateService, private _store: Store<AppState>) { }
 
   characters = [];
 
   ngOnInit(): void {
     this.getCharacters();
+    this._store.dispatch(new LoadCharactersRequest());
   }
 
   getCharacters() {
