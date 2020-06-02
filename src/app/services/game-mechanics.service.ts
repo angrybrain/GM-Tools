@@ -1,10 +1,6 @@
-import { Injectable } from '@angular/core';
 import { Character } from '../models/character'
 import { PanicEffects } from '../enums/panicEffects'
 
-@Injectable({
-  providedIn: 'root'
-})
 export class GameMechanicsService {
 
   character: Character
@@ -239,14 +235,7 @@ export class GameMechanicsService {
     return passed;
   }
 
-  private surpriseCheck() {
-    let surprised: boolean = this.fearSave();
-    alert(`${this.character.name} surprised! He is unable to act for one round!`)
-    return surprised;
-  }
-
-
-  private panicCheck() {
+  public panicCheck() {
     let result = +prompt(`${this.character.name} is about to PANIC! Roll 2d10 to make a Stress Check`);
     if (result > this.character.stress) {
       alert(`${this.character.name} pass Panic check! 1 stress point relived!`)
