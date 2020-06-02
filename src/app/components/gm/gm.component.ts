@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Character } from '../../models/character'
+import { Character } from '../../models/character';
+import { Observable } from 'rxjs';
 import { CharacterService } from '../../services/character.service';
 import { UpdateService } from '../../services/update.service';
 import faker from 'faker';
 import classList from '../../models/classes';
+import { ReduxCharacterService } from '../../services/redux-character.service';
 
 @Component({
   selector: 'gm-tools-gm',
@@ -12,30 +14,29 @@ import classList from '../../models/classes';
 })
 export class GmComponent implements OnInit {
 
-  constructor(public charactersService: CharacterService, private updateService: UpdateService) { }
+  loading$: Observable<boolean>;
+  characters$: Observable<Character[]>;
 
-  characters = [];
+  constructor(public charactersService: CharacterService, private updateService: UpdateService, private reduxCharacterServices: ReduxCharacterService) {
+    this.characters$ = reduxCharacterServices.entities$;
+    this.loading$ = reduxCharacterServices.loading$;
+  }
 
   ngOnInit(): void {
     this.getCharacters();
   }
 
   getCharacters() {
-    this.charactersService.getAll().subscribe((respond) => this.characters = respond);
+    this.reduxCharacterServices.getAll();
   }
 
   deleteCharacter(character: Character) {
-    this.charactersService.delete(character)
-      .subscribe((respond) => {
-        this.characters = this.characters.filter(character =>
-          respond._id !== character._id
-        );
-        this.updateService.sendUpdate("Delete");
-      })
+    this.reduxCharacterServices.delete(character._id);
+    this.updateService.sendUpdate("Delete");
   }
 
   saveCharacter(character: Character) {
-    this.charactersService.update(character).subscribe(() => { }), (error) => { alert('NOT SAVED') };
+    this.reduxCharacterServices.update(character);
     this.updateService.sendUpdate("Save");
   }
 
@@ -75,10 +76,8 @@ export class GmComponent implements OnInit {
       saves: randomClass,
       health: health,
     };
-    this.charactersService.add(character).subscribe((respond) => {
-      this.characters.push(respond);
-      this.updateService.sendUpdate("Add new");
-    })
+    // this.CharacterServices.add(character)
+    this.updateService.sendUpdate("Add new");
   }
 
 }

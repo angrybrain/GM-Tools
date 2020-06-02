@@ -12,6 +12,17 @@ import { GmComponent } from './components/gm/gm.component';
 import { CharacterComponent } from './components/character/character.component';
 import { BodyComponent } from './components/body/body.component';
 import { CharacterLiteComponent } from './components/character-lite/character-lite.component';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { entityConfig } from './entities/entity-metadata';
+import { config } from './configs/config';
+
+const defaultDataServiceConfig: DefaultDataServiceConfig = {
+  root: config.apiUrl,
+  timeout: 3000,
+}
 
 @NgModule({
   declarations: [
@@ -30,9 +41,15 @@ import { CharacterLiteComponent } from './components/character-lite/character-li
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    EntityDataModule.forRoot(entityConfig),
+    StoreDevtoolsModule.instrument(),
   ],
-  providers: [],
+  providers: [
+    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
