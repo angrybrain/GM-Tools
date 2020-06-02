@@ -1,9 +1,11 @@
-import { Injectable } from "@angular/core";
 import faker from 'faker';
 import classList from '../models/classes';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+    providedIn: 'root'
+})
 
-@Injectable()
 export class GenerateCharacterHelper {
     constructor() { };
 
