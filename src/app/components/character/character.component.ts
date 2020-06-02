@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { Character } from '../../models/character'
 import { PanicEffects } from '../../enums/panicEffects'
+import { Store } from '@ngrx/store';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { PanicEffects } from '../../enums/panicEffects'
 })
 export class CharacterComponent implements OnInit {
 
-  @Input() character: Character
+  @Input() character: Character;
   @Output() delete = new EventEmitter<Character>();
   @Output() save = new EventEmitter<Character>();
 
