@@ -16,8 +16,6 @@ export class PlayerComponent implements OnInit {
   ngOnInit(): void {
     this.getCharacters();
     this.updateService.update.subscribe(msg => {
-      console.log("Updated");
-      console.log(msg);
       this.getCharacters();
     })
   }

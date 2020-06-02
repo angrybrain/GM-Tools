@@ -30,7 +30,7 @@ import { CharacterLiteComponent } from './components/character-lite/character-li
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

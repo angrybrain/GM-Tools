@@ -4,6 +4,7 @@ import { CharacterService } from '../../services/character.service';
 import { UpdateService } from '../../services/update.service';
 import faker from 'faker';
 import classList from '../../models/classes';
+import { GenerateCharacterHelper } from '../../helpers/generateCharacter.helper';
 
 @Component({
   selector: 'gm-tools-gm',
@@ -12,7 +13,7 @@ import classList from '../../models/classes';
 })
 export class GmComponent implements OnInit {
 
-  constructor(public charactersService: CharacterService, private updateService: UpdateService) { }
+  constructor(public charactersService: CharacterService, private updateService: UpdateService, private generateCharacterHelper: GenerateCharacterHelper) { }
 
   characters = [];
 
@@ -35,50 +36,15 @@ export class GmComponent implements OnInit {
   }
 
   saveCharacter(character: Character) {
-    this.charactersService.update(character).subscribe(() => { }), (error) => { alert('NOT SAVED') };
+    this.charactersService.update(character).subscribe(() => { }), () => { alert('NOT SAVED') };
     this.updateService.sendUpdate("Save");
   }
 
   createNewCharacter() {
-    let classNames = Object.keys(classList);
-    let randomClass = classList[classNames[classNames.length * Math.random() << 0]];
-
-    const name = faker.name.findName();
-
-    const maxStat = 60;
-    const minStat = 6;
-    let stats = {
-      STR: randomClass.Bonus.STR + Math.floor(Math.random() * (maxStat - minStat) + minStat),
-      SPD: randomClass.Bonus.SPD + Math.floor(Math.random() * (maxStat - minStat) + minStat),
-      INT: randomClass.Bonus.INT + Math.floor(Math.random() * (maxStat - minStat) + minStat),
-      CMB: randomClass.Bonus.CMB + Math.floor(Math.random() * (maxStat - minStat) + minStat),
-    }
-
-    const baseHP = stats.STR * 2;
-    const halfHP = Math.floor(baseHP / 2);
-    let headHP = 20;
-    if (halfHP < 20) {
-      headHP = halfHP;
-    };
-    let health = {
-      Head: headHP,
-      Torso: baseHP,
-      ArmR: halfHP,
-      ArmL: halfHP,
-      LegL: halfHP,
-      LegR: halfHP,
-    };
-
-    let character = {
-      name: name,
-      stats: stats,
-      saves: randomClass,
-      health: health,
-    };
+    let character = this.generateCharacterHelper.new();
     this.charactersService.add(character).subscribe((respond) => {
       this.characters.push(respond);
       this.updateService.sendUpdate("Add new");
     })
   }
-
 }
