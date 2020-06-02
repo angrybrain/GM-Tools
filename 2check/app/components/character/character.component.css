@@ -1,0 +1,231 @@
+.container {
+    max-width: 800px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px black dotted;
+    display: grid;
+    grid-template-columns: 100px auto 100px;
+    grid-template-rows: auto;
+    grid-template-areas: "name name name" "stats stress actions" "stats body actions" "info info info" "config config config";
+    justify-items: center;
+    align-items: stretch;
+}
+
+.character-name {
+    grid-area: name;
+    width: 100%;
+}
+
+.character-name input {
+    border-width: 0 0 0 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
+    background-color: white;
+}
+
+.character-active {
+    grid-area: name;
+    justify-self: end;
+    align-items: center;
+}
+
+.character-active input {
+    height: 20px;
+    width: 20px;
+}
+
+.stats-block {
+    grid-area: stats;
+}
+
+.stats-block button {
+    width: 100%;
+    height: 30px;
+    border: 0px solid black;
+    border-width: 0 0 1px 0;
+}
+
+.stats-block button:hover {
+    border: 1px black solid;
+    background-color: gray;
+}
+
+.stress-block {
+    grid-area: stress;
+    display: flex;
+    justify-items: center;
+}
+
+.stress-block input {
+    border: 0px solid black;
+    text-align: center;
+    font-size: large;
+}
+
+.body-block {
+    grid-area: body;
+    width: 400px;
+}
+
+.actions-block {
+    grid-area: actions;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.actions-block button {
+    margin-top: 5px;
+    width: 100px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.textinfo-block {
+    grid-area: info;
+}
+
+.textinfo-block textarea {
+    max-width: 700px;
+    width: 700px;
+    height: auto;
+}
+
+.config-block {
+    grid-area: config;
+    margin: auto;
+    width: 700px;
+    height: 200px;
+    border: 1px solid black;
+    background-color: whitesmoke;
+    overflow: auto;
+    padding: 1em;
+}
+
+.checks {
+    margin: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.checkbox {
+    width: 1em;
+    height: 1em;
+}
+
+.checks div {
+    padding: 10px;
+    border-collapse: collapse;
+    border: solid 1px black;
+}
+
+.config-block input {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid black;
+    border-width: 0 0 1px 0;
+    font-size: large;
+    text-align: center;
+}
+
+@media (max-width: 650px) {
+    .container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto;
+        grid-template-areas: "name name" "stress stress" "body body" "stats actions" "info info" "config config";
+        justify-items: center;
+        align-items: stretch;
+    }
+    .character-name {
+        grid-area: name;
+    }
+    .character-name input {
+        border-width: 0 0 0 0;
+        font-size: 1.2em;
+        font-weight: bold;
+        width: 70%;
+        text-align: left;
+    }
+    .character-active {
+        grid-area: name;
+    }
+    .character-active input {
+        height: 20px;
+        width: 20px;
+    }
+    .stress-block {
+        grid-area: stress;
+    }
+    .stress-block input {
+        border: 0px solid black;
+        text-align: center;
+        font-size: large;
+    }
+    .body-block {
+        grid-area: body;
+        width: 400px;
+    }
+    .stats-block {
+        grid-area: stats;
+    }
+    .stats-block button {
+        height: 30px;
+        border: 0px solid black;
+        border-width: 0 0 1px 0;
+    }
+    .stats-block button:hover {
+        border: 1px black solid;
+        background-color: gray;
+    }
+    .actions-block {
+        grid-area: actions;
+        display: flex;
+        align-items: center;
+        justify-content: stretch;
+        flex-direction: column;
+    }
+    .actions-block button {
+        margin-top: 5px;
+        width: 100%;
+        height: 50px;
+        background-color: white;
+        border: 1px solid black;
+        text-align: center;
+    }
+    .textinfo-block {
+        grid-area: info;
+        width: 100%;
+    }
+    .textinfo-block textarea {
+        max-width: 100%;
+        height: auto;
+    }
+    .config-block {
+        grid-area: config;
+        max-width: 90%;
+        margin: auto;
+        height: 200px;
+        border: 1px solid black;
+        background-color: whitesmoke;
+        padding: 1em;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .checks {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .checks div {
+        margin: 10px;
+        width: 100px;
+        height: 50px;
+    }
+}
